@@ -36,11 +36,10 @@ class LaneKeeping():
         a,b,_ = image.shape[:]
         d_black = np.array([0,0,0])
         u_black = np.array([80,150,200])
-        maske = cv2.inRange(hsv,d_black,u_black)
+        mask = cv2.inRange(hsv,d_black,u_black)
         #sonuc = cv2.bitwise_and(area,area,mask=maske)        
-        M = cv2.moments(maske)
-        cv2.circle(image,(int(b/2),int(a/2)),5,(0,0,0),-1)
-        
+        M = cv2.moments(mask)
+        cv2.circle(image,(int(b/2),int(a/2)),5,(0,0,0),-1)   
         if M['m00']:
             cx = int(M['m10']/M['m00'])
             cy = int(M['m01']/M['m00'])

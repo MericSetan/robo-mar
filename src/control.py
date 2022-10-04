@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -9,21 +8,21 @@ from geometry_msgs.msg import Twist
 
 
 class Control():
-    def __init__(self,speed_msg,refAngle):
-        self.refAngle =  refAngle #radian
+    def __init__(self,speed_msg,ref_angle):
+        self.ref_angle =  ref_angle #radian
         self.speed_msg = speed_msg  
     
-    def solSeritTakip(self,aciSol):  
-        if aciSol is not None:  
-            fark = aciSol- self.refAngle
+    def follow_left(self,left_angle):  
+        if left_angle is not None:  
+            diff = left_angle- self.ref_angle
 
-            if fark >0.02:
+            if diff >0.02:
                 
-                self.speed_msg.angular.z = fark*5
-                self.speed_msg.linear.x = 0.05-fark
+                self.speed_msg.angular.z = diff*5
+                self.speed_msg.linear.x = 0.05-diff
                 return self.speed_msg
             else:
-                self.speed_msg.angular.z = fark*2
+                self.speed_msg.angular.z = diff*2
                 self.speed_msg.linear.x = 0.5
                 return self.speed_msg
          
@@ -33,17 +32,17 @@ class Control():
             return self.speed_msg
                  
         
-    def sagSeritTakip(self,aciSag):   
-        if aciSag is not None:  
-            fark = aciSag- self.refAngle
+    def follow_right(self,right_angle):   
+        if right_angle is not None:  
+            diff = right_angle- self.ref_angle
             
-            if fark >0.02:
+            if diff >0.02:
                 
-                self.speed_msg.angular.z = -fark*5
-                self.speed_msg.linear.x= 0.05+fark
+                self.speed_msg.angular.z = -diff*5
+                self.speed_msg.linear.x= 0.05+diff
                 return self.speed_msg
             else:
-                self.speed_msg.angular.z  = -fark*2
+                self.speed_msg.angular.z  = -diff*2
                 self.speed_msg.linear.x = 0.5
                 return self.speed_msg
        
