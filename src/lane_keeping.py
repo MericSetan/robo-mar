@@ -24,6 +24,7 @@ class LaneKeeping():
         
         cv2.imshow("third",third)
         cv2.imshow("fourth",new)      
+        cv2.imshow("second",second)   
         cv2.waitKey(1)
         return leftAngle,rightAngle,red
 
